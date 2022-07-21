@@ -10,3 +10,4 @@ var user =new Schema(
 )
 
 module.exports=mongoose.model('user',user);
+//anand nhi ho rha kya
