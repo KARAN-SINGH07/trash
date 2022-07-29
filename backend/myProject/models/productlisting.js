@@ -6,7 +6,8 @@ var productlisting = new Schema({
     productname: String,
     description: String,
     companyname: String,
-    price: String
+    price: String,
+    quantity: Number
 
 });
 

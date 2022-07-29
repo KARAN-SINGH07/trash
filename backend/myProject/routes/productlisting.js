@@ -28,7 +28,9 @@ router.get('/getproduct', async(req, res) => {
 
 router.post('/updateproduct', async(req, res) => {
     try {
-        let productlisting = await ProductListing.findByIdAndUpdate(req.body.id, { productname: req.body.productname, description: req.body.description, companyname: req.body.productname, price: req.body.price }).exec();
+        let productlisting = await ProductListing.findByIdAndUpdate(req.body.id, { productname: req.body.productname, description: req.body.description, companyname: req.body.companyname, 
+        quantity: req.body.quantity, 
+        price: req.body.price }).exec();
         res.json({ message: "Product Successfully Updated", data: productlisting, success: true });
     } catch (err) {
         res.json({ message: err.message, success: false })
