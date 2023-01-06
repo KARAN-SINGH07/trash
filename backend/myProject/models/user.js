@@ -7,4 +7,13 @@ var user = new Schema({
     password: String
 })
 
-module.exports = mongoose.model('user', user);
+module.exports = mongoose.model('User', user); 
+/* var mongoose=require('mongoose')
+var schema = mongosse(schema )
+var user=new Schema({
+    name:String,
+    email:String,
+    phone:number,
+    password:String
+})
+    */

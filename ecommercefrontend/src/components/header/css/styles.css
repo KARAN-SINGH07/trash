@@ -10,10 +10,13 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-:root {
+/* .purple{
+  :#8E44AD ;
+} */
+ :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
-  --bs-purple: #6f42c1;
+  --bs-purple: #8E44AD;
   --bs-pink: #d63384;
   --bs-red: #dc3545;
   --bs-orange: #fd7e14;
@@ -33,7 +36,8 @@
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #ffc800;
+  --bs-primary: #6c757d;
+  /* --bs-purple: #8E44AD; */
   --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
@@ -3099,6 +3103,16 @@ textarea.form-control-lg {
   background-color: #157347;
   border-color: #146c43;
 }
+.btn-purple {
+  color: #fff;
+  background-color: #8E44AD;
+  border-color:#8E44AD;
+}
+.btn-purple:hover {
+  color: #fff;
+  background-color: #532964 ;
+  border-color: #532964;
+}
 .btn-check:focus + .btn-success, .btn-success:focus {
   color: #fff;
   background-color: #157347;
@@ -3780,7 +3794,7 @@ textarea.form-control-lg {
 .dropdown-item.active, .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #ffc800;
+  background-color: #8E44AD;
 }
 .dropdown-item.disabled, .dropdown-item:disabled {
   color: #adb5bd;
@@ -7942,6 +7956,7 @@ textarea.form-control-lg {
   border-radius: 50% !important;
 }
 
+
 .rounded-pill {
   border-radius: 50rem !important;
 }
@@ -11367,7 +11382,7 @@ p {
   letter-spacing: 0.0625em;
 }
 #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
-  color: #ffc800;
+  color: #ac00e6;
 }
 
 @media (min-width: 992px) {
@@ -11407,6 +11422,7 @@ p {
 }
 header.masthead {
   background: rgba(0, 0, 0, 0.7) url(../assets/img/header-bg1.jpg);
+  /* background-color: #f2ccff; */
  height: 100%;
  background-position: center;
  background-repeat: no-repeat;
@@ -11588,7 +11604,7 @@ header.masthead .masthead-heading {
   color: white;
   border: 7px solid #e9ecef;
   border-radius: 100%;
-  background-color: #ffc800;
+  background-color: #8E44AD;
 }
 .timeline > li .timeline-image h4, .timeline > li .timeline-image .h4 {
   font-size: 10px;

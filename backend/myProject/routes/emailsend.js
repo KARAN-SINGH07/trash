@@ -25,7 +25,7 @@ router.post('/buyproduct', (req, res) => {
       // })
       var mailOptions = {
         from: 'ks5754111@gmail.com',
-        to: 'py87447@gmail.com',
+        to: 'bangaripallavi2000@gmail.com',
         subject: 'Order Details',
         text: 'Please Ignore me and Please delete Me.'  
 

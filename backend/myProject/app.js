@@ -3,17 +3,20 @@
     var path = require('path');
     var cookieParser = require('cookie-parser');
     var logger = require('morgan');
+    var cors=require('cors');
     var mongoose = require('mongoose');
-    
+    var multer=require('multer');
 
     var indexRouter = require('./routes/index');
     var usersRouter = require('./routes/users');
     var adminRouter = require('./routes/admin');
+    var otpRouter= require('./routes/otp');
     var productlistingRouter = require('./routes/productlisting');
     var emailsendRouter = require('./routes/emailsend');
 
     var app = express();
-
+    
+    app.use(cors());
     // view engine setup
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'jade');
@@ -29,9 +32,20 @@
     app.use('/admin', adminRouter);
     app.use('/productlisting', productlistingRouter);
     app.use('/emailsend', emailsendRouter);
+    app.use('/otpsend', otpRouter);
 
 
-
+    var storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, 'uploads')
+        },
+        filename: (req, file, cb) => {
+            cb(null, file.fieldname + '-' + Date.now())
+        }
+    });
+      
+    var upload = multer({ storage: storage });
+    
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {
         next(createError(404));
@@ -42,7 +56,7 @@
             if (err) {
                 console.log(err)
             } else {
-                console.log("Db Connected")
+                console.log("Database Connected")
             }
 
         }

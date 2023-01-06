@@ -1,121 +1,140 @@
-// import './registration.css';
+// import logo from './logo.svg';
+// import image1 from './img/registration.jpg'
+import React, {useState,useEffect} from 'react';
+import axios from 'axios';
+import {useNavigate,Link} from 'react-router-dom';
+import {ToastContainer,toast} from 'react-toastify';
+import './registration.css';
 
 
 function Registration() {
+    const navigate1=useNavigate();
+    // const navigate2=useNavigate();
+    useEffect(()=>{
+      
+      if(localStorage.getItem('token')|| localStorage.getItem('admintoken')){
+        navigate1('/home')
+      }
+    },[])
+    // let history=useNavigate();
+    // const[name,setname]=useState('');
+    // const[email,setemail]=useState('');
+    // const[phone,setphone]=useState('');
+    // const[password,setpassword]=useState('');
+    // const [error, setError] = useState("");
+    
+    // //const [checkbox,setCheckbox]=useState(false);
+    // //console.log(checkbox)
+    // const postData=()=>{
+    //     axios.post('http://localhost:4000/users/register',{
+    //         name,
+    //         email,
+    //         phone,
+    //         password
+    //     }).then((history)=>{
+    //         console.log(history.data)
+    //         history.push('/read')
+    //     })
+    // }
+    const [data, setData] = useState({
+		name: "",
+		email: "",
+		phone: "",
+		password: "",
+	});
+	const [error, setError] = useState("");
+	const navigate = useNavigate();
+
+	const handleChange = ({ currentTarget: input }) => {
+		setData({ ...data, [input.name]: input.value });
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const url = "http://localhost:4000/users/register";
+			const { data: res } = await axios.post(url, data);
+			navigate("/login");
+			console.log(res.message);
+		} catch (error) {
+			if (
+				error.response &&
+				error.response.status >= 400 &&
+				error.response.status <= 500
+			) {
+				setError(error.response.data.message);
+			}
+		}
+	};
+
   return (
-    <body>
-    <section clssName="h-100 bg-dark">
-        <div clssName="container py-5 h-100">
-            <div clssName="row d-flex justify-content-center align-items-center h-100">
-                <div clssName="col">
-                    <div clssName="card card-registration my-4">
-                        <div clssName="row g-0">
-                            <div clssName="col-xl-6 d-none d-xl-block">
-                                {/* <img src="img/registration.jpg" alt="Sample photo" clssName="img-fluid" style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" /> */}
-                            </div>
-                            <div clssName="col-xl-6">
-                                <div clssName="card-body p-md-5 text-black">
-                                    <h3 clssName="mb-5 text-uppercase text-success">Registration form</h3>
 
-                                    <div clssName="row">
-                                        <div clssName="col-md-6 mb-4">
-                                            <div clssName="form-outline">
-                                                <input type="text" id="form3Example1m" clssName="form-control form-control-lg" placeholder="eg: Karan" />
-                                                <label clssName="form-label" for="form3Example1m">First name</label>
-                                            </div>
-                                        </div>
-                                        <div clssName="col-md-6 mb-4">
-                                            <div clssName="form-outline">
-                                                <input type="text" id="form3Example1n" clssName="form-control form-control-lg" placeholder="eg: Singh" />
-                                                <label clssName="form-label" for="form3Example1n">Last name</label>
-                                            </div>
-                                        </div>
-                                    </div>
+    <body className="form-body">
+                      <ToastContainer/>
 
+   <div class="form-body">
+      <div class="row">
+          <div class="form-holder">
+              <div class="form-content">
+                  <div class="form-items">
+                      <h3>Register Now</h3>
+                      <p>Fill in the data below.</p>
+                      <form class="requires-validation" novalidate onSubmit={handleSubmit}>
+                        
+                        
 
+                          <div class="col-md-12">
+                             <input class="form-control" type="text" name="name" placeholder="Your Name"onChange={handleChange}
+							value={data.name} required/>
+                             <div class="valid-feedback">Name field is valid!</div>
+                             <div class="invalid-feedback">Name field cannot be blank!</div>
+                          </div>
+                          <div class="col-md-12 mt-4">
+                             <input class="form-control" type="number" name="phone" placeholder="Phone Number" onChange={handleChange}
+							value={data.phone} required/>
+                             <div class="valid-feedback">Phone Number field is valid!</div>
+                             <div class="invalid-feedback">Phone Number field cannot be blank!</div>
+                          </div>
 
-                                    <div clssName="form-outline mb-4">
-                                        <input type="text" id="form3Example8" clssName="form-control form-control-lg" />
-                                        <label clssName="form-label" for="form3Example8">Address</label>
-                                    </div>
+                          
 
-                                    <div clssName="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                        <div class="col-md-12 mt-4">
+                            <input class="form-control" type="email" name="email" placeholder="E-Mail" onChange={handleChange}
+							value={data.email} required/>
+                             <div class="valid-feedback">E-mail field is valid!</div>
+                             <div class="invalid-feedback">E-mail field cannot be blank!</div>
+                         </div>
+                        <div class="col-md-12 mt-4">
+                            <input class="form-control" type="text" name="password" placeholder="Password" onChange={handleChange}
+							value={data.password} required/>
+                             <div class="valid-feedback">Password field is valid!</div>
+                             <div class="invalid-feedback">Password field cannot be blank!</div>
+                         </div>
+                         
+                         <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required/>
+                        <label class="form-check-label">I confirm that all data are correct</label>
+                       <div class="invalid-feedback">Please confirm that the entered data are all correct!</div>
+                      </div>
+                      {error && <div className="error_msg">{error}</div>}
+                
 
-                                        <h6 clssName="mb-0 me-4">Gender: </h6>
+                          <div class="form-button mt-3">
+                              <button id="submit" type="submit" class=" btn btn-purple text-white btn-primary ">Register</button>
+                          </div>
 
-                                        <div clssName="form-check form-check-inline mb-0 me-4">
-                                            <input clssName="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender" value="option1" />
-                                            <label clssName="form-check-label" for="femaleGender">Female</label>
-                                        </div>
+                          <p className="mt-4">Are you already registered.<Link className="mar-lef" to="/login">Login</Link></p>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
 
-                                        <div clssName="form-check form-check-inline mb-0 me-4">
-                                            <input clssName="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender" value="option2" />
-                                            <label clssName="form-check-label" for="maleGender">Male</label>
-                                        </div>
-
-                                        <div clssName="form-check form-check-inline mb-0">
-                                            <input clssName="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender" value="option3" />
-                                            <label clssName="form-check-label" for="otherGender">Other</label>
-                                        </div>
-
-                                    </div>
-
-                                    <div clssName="row">
-                                        <div clssName="col-md-6 mb-4">
-
-                                            <select clssName="select">
-                            <option value="1">State</option>
-                            <option value="2">Option 1</option>
-                            <option value="3">Option 2</option>
-                            <option value="4">Option 3</option>
-                          </select>
-
-                                        </div>
-                                        <div clssName="col-md-6 mb-4">
-
-                                            <select clssName="select">
-                            <option value="1">City</option>
-                            <option value="2">Option 1</option>
-                            <option value="3">Option 2</option>
-                            <option value="4">Option 3</option>
-                          </select>
-
-                                        </div>
-                                    </div>
-
-                                    <div clssName="form-outline mb-4">
-                                        <input type="Date" id="form3Example9" clssName="form-control form-control-lg" />
-                                        <label clssName="form-label" for="form3Example9">DOB</label>
-                                    </div>
-
-                                    <div clssName="form-outline mb-4">
-                                        <input type="text" id="form3Example90" clssName="form-control form-control-lg" />
-                                        <label clssName="form-label" for="form3Example90">Pincode</label>
-                                    </div>
-
-
-
-                                    <div clssName="form-outline mb-4">
-                                        <input type="text" id="form3Example97" clssName="form-control form-control-lg" placeholder="Enter your e-mail" />
-                                        <label clssName="form-label" for="form3Example97">Email ID</label>
-                                    </div>
-
-                                    <div clssName="d-flex justify-content-end pt-3">
-                                        <button type="button" clssName="btn btn-light btn-lg">Reset all</button>
-                                        <button type="button" clssName="btn btn-outline-dark btn-lg ms-2">Register</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+  <script src="./registration.js"></script>
 </body>
-  )
+  );
 }
 
 export default Registration;
